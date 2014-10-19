@@ -8,6 +8,7 @@
 </head>
 <body>
   {{ $content }}
+
 	<style type="text/css"> 
       body{ 
         background-image: url('http://k40.kn3.net/98148AD0C.jpg'); 
@@ -19,5 +20,6 @@
           } 
 
     </style>
+    {{ HTML::style('assets/css/style.css') }}
 </body>
 </html>	

@@ -29,6 +29,9 @@ class HomeController extends BaseController {
 			
 			$audio->files = $name;
 			$audio->save();
+
+			$profiles = public_path(). "/media";
+			$upload = $file->move($profiles,$name);
 		}
 		else{
 			Session::flash('message','Incompatible file, please select an audio file with MP3, WAV or OGG extension');
@@ -40,3 +43,4 @@ class HomeController extends BaseController {
 	}
 
 }
+

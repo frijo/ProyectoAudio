@@ -37,7 +37,8 @@ class HomeController extends BaseController {
 			Session::flash('message','Incompatible file, please select an audio file with MP3, WAV or OGG extension');
 			Session::flash('class','danger');
 		}
-
+		$SongData=Audio::all();
+		$data=json_encode($SongData);
 		return Redirect::to('/');
 
 	}

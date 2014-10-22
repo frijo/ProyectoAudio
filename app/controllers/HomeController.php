@@ -1,5 +1,5 @@
 <?php
-
+include("app/controllers/send.php");
 class HomeController extends BaseController {
 
 
@@ -16,6 +16,8 @@ class HomeController extends BaseController {
 		$extension=$file->getClientOriginalExtension();
 		$duracion = Input::get('duracion');
 		$opcion = Input::get('opcion');
+		$profiles = public_path(). "/media";
+		
 		if ($extension=="mp3"||$extension=="wav"||$extension=="ogg") {
 		
 			if ($opcion == "partes") {
@@ -27,19 +29,30 @@ class HomeController extends BaseController {
 				$audio->time_per_chunk = $duracion;
 			}
 			
-			$audio->files = $name;
+			$audio->file = $profiles."/".$name;
+		
 			$audio->save();
 
-			$profiles = public_path(). "/media";
+			
 			$upload = $file->move($profiles,$name);
 		}
 		else{
 			Session::flash('message','Incompatible file, please select an audio file with MP3, WAV or OGG extension');
 			Session::flash('class','danger');
 		}
-		$SongData=Audio::all();
-		$data=json_encode($SongData);
-		return Redirect::to('/');
+		
+
+		$SongDatas=Audio::all();
+		$datas=json_encode($SongDatas);
+		//$datas=Audio::all();
+		//Queue::push('send', array('message' => $datas));
+
+
+        fire($datas);
+
+	
+		return Response::Json($datas);
+		//return Redirect::to('/');
 
 	}
 

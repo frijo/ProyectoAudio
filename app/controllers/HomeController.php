@@ -51,8 +51,8 @@ class HomeController extends BaseController {
         fire($datas);
 
 	
-		return Response::Json($datas);
-		//return Redirect::to('/');
+		//return Response::Json($datas);
+		return Redirect::to('/');
 
 	}
 

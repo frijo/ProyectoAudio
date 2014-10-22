@@ -19,16 +19,21 @@
 			
 			$continue = true;
 			//$message= '{"id":'.$dat ->id.',"file":"'.$dat ->file.'","parts":"'.$dat ->parts.'","time_per_chunk":"'.$dat ->time_per_chunk.'"}';
-			//$message= $Rowdat ->id .",". $Rowdat ->file;
-			
-			
-
 			$id=$dat["id"];
 			$file=$dat["file"];
 			$parts=$dat["parts"];
 			$time_per_chunk=$dat["time_per_chunk"];
-			//$message= '{"id":'.$id.',"file":"'.$file.'","parts":"'.$parts.'","time_per_chunk":"'.$time_per_chunk.'"}';
-			$message=$id.$file.$parts.$time_per_chunk;
+			
+			
+			$message=array(
+				'id'=>$id,
+				'file'=>$file,
+				'parts'=>$parts,
+				'time_per_chunk'=>$time_per_chunk
+
+			);
+
+
 			$message=json_encode($message,true);
 
 			//return Response::Json($message);

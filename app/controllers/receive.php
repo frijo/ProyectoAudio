@@ -28,20 +28,28 @@
 	//	exec($var);
 	//	update($json["id"],$to);
 		//echo $json["file"]."\n";
-		Part();
-		echo " [x] Received "."Audio ID :".$json['id']."\n";
+		Part($json);
+		echo " [x] Received "."Audio ID :".$json['id']." "."file :".$json['file']."\n";
 //	exec(ffmpeg -ss 0 -t 60 -i $path $newpath);
 	//shell_exec (ffmpeg -ss 0 -t 60 -i $path $newpath );
 		
 	//exec(ffmpeg -i $path -acodec copy -t 00:00:60 -ss 00:00:00 $newpath);
 	
 	};
-	function Part()
+	function Part($json)
 	{
-
+		//$json = $msg->body;
+		//$json=(json_decode($json,true));
+		$cont=0;
 	//	$path=public_path()."/media/"."bell-ringing-01.mp3";
 	//	$newpath=public_path()."/PartsSongs/"."bell-ringing-01"."-part1".".mp3";
-		$cmd="ffmpeg -ss 0 -t 120 -i /var/www/ProyectoAudio/public/media/America-Horse.mp3 /var/www/ProyectoAudio/public/PartsSongs/America-Horse-part1.mp3";
+		
+
+	//	$message= '{"id":'.$dat ->id.',"file":"'.$dat ->file.'","parts":"'.$dat ->parts.'","time_per_chunk":"'.$dat ->time_per_chunk.'"}';
+
+		//$cmd='"ffmpeg -ss 0 -t 120 -i '.$json['file'].' /var/www/ProyectoAudio/public/PartsSongs/Song'.$json['id'].'-part'.$cont.'.mp3"';
+		$cmd='ffmpeg -ss 0 -t 120 -i '.$json['file'].' /var/www/ProyectoAudio/public/PartsSongs/Song'.$json['id'].'-part'.$cont.'.mp3';
+
 		shell_exec($cmd);
 	}
 	$channel->basic_consume('myQueue', '', false, true, false, false, $callback);

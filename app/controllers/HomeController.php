@@ -12,6 +12,7 @@ class HomeController extends BaseController {
 	{
 		$audio = new Audio();
 		$file = Input::file('filename');
+
 		$name = $file->getClientOriginalName();
 		$extension=$file->getClientOriginalExtension();
 		$duracion = Input::get('duracion');
@@ -42,19 +43,18 @@ class HomeController extends BaseController {
 		}
 		
 
-		$SongDatas=Audio::all();
+		$SongDatas=Audio::ver();
 		$datas=json_encode($SongDatas);
 		//$datas=Audio::all();
 		//Queue::push('send', array('message' => $datas));
-
-
+//
         fire($datas);
 
 	
-		//return Response::Json($datas);
+		//;
 		return Redirect::to('/');
 
-	}
+	
 
 }
-
+}
